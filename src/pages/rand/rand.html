@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Authoritative Random Number Dispenser
+    </ion-title>
+    <ion-buttons right>
+      <ion-spinner name="dots" *ngIf="providerLoadPending"></ion-spinner>
+      <ion-spinner *ngIf="simulateFetching"></ion-spinner>
+      <button ion-button (click)="toHome()">HOME</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="rand-content rand-box" padding>
+  <form [formGroup]="reqForm" (submit)="submitFormRequest($event)">
+    <ion-item>
+      <ion-label color="primary">Min Desired Number</ion-label>
+      <ion-input
+        type="number"
+        formControlName='min'
+        placeholder="Type Here"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Max Desired Number</ion-label>
+      <ion-input
+        type="number"
+        formControlName='max'
+        placeholder="Type Here"></ion-input>
+    </ion-item>
+    <button
+      [disabled]="!reqForm.valid"
+      ion-button
+      type="submit"
+      block>Submit Number Request</button>
+  </form>
+  <ion-list>
+    <ion-item>
+      <p><strong>Result: </strong><span *ngIf="simulateFetching">[ WORKING... ]</span></p>
+      <div *ngIf="formReqFulfilled">
+        <p>{{result}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

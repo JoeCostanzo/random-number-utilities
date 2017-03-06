@@ -1,0 +1,10 @@
+{
+  "name": "randomnumberapp",
+  "app_id": "",
+  "v2": true,
+  "typescript": true,
+  "proxies": [{
+    "path": "/nist/rest/record/last",
+    "proxyUrl": "https://beacon.nist.gov/rest/record/last"
+  }]
+}
