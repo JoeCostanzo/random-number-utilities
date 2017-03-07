@@ -22,15 +22,24 @@ export class Crawler {
         .map((res: Response) => res.text())
         .subscribe(
           data => {
-            let re = new RegExp(/outputValue>(.*)/);
-            let tmp = (data.match(re)[1].split(/</)[0].replace(/([a-z])/gi, "")).split('');
+            let re0 = new RegExp(/timeStamp>(.*)/);
+            let re1 = new RegExp(/outputValue>(.*)/);
+            const originalSource = {
+              type: 1,
+              timeStamp: Number(data.match(re0)[1].split(/</)[0]),
+              rawNum: data.match(re1)[1].split(/</)[0]
+            };
+            let tmp = (originalSource.rawNum.replace(/([a-z])/gi, "")).split('');
             tmp.length = ("" + AppSettings.RAND_NUM_MAGNITUDE).length;
-            return resolve(parseInt(tmp.join(), 10));
+            return resolve({
+              originalSource,
+              iterable: parseInt(tmp.join(""), 10)
+            });
           },
           err => reject(console.log('errno, crawler', err)),
           () => {}//success
-      )
-    })
+      );
+    });
 
   }
 

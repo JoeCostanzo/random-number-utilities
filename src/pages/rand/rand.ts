@@ -13,8 +13,9 @@ import { shuffle } from 'lodash';
   viewProviders: [Crawler]
 })
 export class RandPage {
-  numberStore: Array<any> = [];
+  storedNumsToDrawFrom: Array<any> = [];
   result: number = 0;
+  originalSource: any;
   providerLoadPending: boolean;
   simulateFetching: boolean = false;
   formReqFulfilled: boolean = false;
@@ -30,15 +31,16 @@ export class RandPage {
     this.reqForm = new FormGroup({ min, max });
 
     this.providerLoadPending = true;
-    this.populateNumberStore();
+    this.populateStoredNumbers();
   }
 
-  populateNumberStore(workingOn = this.numberStore) {
+  populateStoredNumbers(workingOn = this.storedNumsToDrawFrom) {
     return new Promise((resolve, reject) => {
-      const finalize = result => {
-        workingOn.push(...('' + Math.round(result)).split(''));
+      const finalize = opts => {
+        workingOn.push(...('' + Math.round(opts.iterable)).split(''));
         if (workingOn && (parseInt(workingOn.join(''), 10) > AppSettings.RAND_NUM_MAGNITUDE)) {
-          this.numberStore = workingOn;
+          this.storedNumsToDrawFrom = workingOn;
+          this.originalSource = opts.originalSource;
           this.providerLoadPending = false;
           return resolve();
         }
@@ -58,9 +60,9 @@ export class RandPage {
 
   altRandNumMethod() {
     return new Promise((resolve, reject) => {
-      let num = Math.random();
-      if (num *= AppSettings.RAND_NUM_MAGNITUDE) {
-        return resolve(num);
+      let iterable = Math.random();
+      if (iterable *= AppSettings.RAND_NUM_MAGNITUDE) {
+        return resolve({ originalSource: { type: 2 }, iterable });
       }
       return reject('Error generating random numbers by Math.random');
     });
@@ -90,7 +92,7 @@ export class RandPage {
   }
 
   completeSelection({ min, max, desiredLength }) {
-    const seed = Number('.' + shuffle(this.numberStore.splice(0, desiredLength)).join(''));
+    const seed = Number('.' + shuffle(this.storedNumsToDrawFrom.splice(0, desiredLength)).join(''));
 
     return Math.floor(seed * (max - min + 1)) + min;
   };
@@ -100,9 +102,9 @@ export class RandPage {
     const min = parseInt(this.reqForm.controls['min'].value, 10);
     const desiredLength = ('' + max).length;
 
-    if (this.numberStore.length < desiredLength) {
+    if (this.storedNumsToDrawFrom.length < desiredLength) {
       return new Promise((resolve, reject) => {
-        return this.populateNumberStore()
+        return this.populateStoredNumbers()
           .then(() => resolve(this.completeSelection({ min, max, desiredLength })))
           .catch(err => reject(err));
       });
