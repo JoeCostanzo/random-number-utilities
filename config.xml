@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="info.joeco.randomnumberapp937288" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget
+  android-versionCode="2"
+  id="info.joeco.randomnumberapp937288"
+  version="0.0.1"
+  xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Random Numbers App</name>
   <description>An Ionic demo app by Joe Costanzo.</description>
   <author email="joe@joeco.info" href="http://joeco.info/">Joe Costanzo</author>
