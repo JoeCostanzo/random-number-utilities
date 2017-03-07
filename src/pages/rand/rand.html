@@ -39,6 +39,17 @@
       <p><strong>Result: </strong><span *ngIf="simulateFetching">[ WORKING... ]</span></p>
       <div *ngIf="formReqFulfilled">
         <p>{{result}}</p>
+        <div *ngIf="originalSource.type === 1">
+          <p><strong>Number seed data (sourced from NIST.gov):</strong></p>
+          <p class="my-text-wrap">{{originalSource.rawNum}}</p>
+          <p><strong>Timestamp (for certification proof):</strong></p>
+          <p>{{originalSource.timeStamp}}</p>
+        </div>
+        <div *ngIf="originalSource.type === 2">
+          <p>Temporary error in number retrieval method (network error).</p>
+          <p>Unable to certify original source / true randomness of result.</p>
+        </div>
+
       </div>
     </ion-item>
   </ion-list>
