@@ -4,16 +4,43 @@
       joe app
     </ion-title>
     <ion-buttons right>
-      <button ion-button (click)="toHome()">HOME</button>
+      <button ion-button (click)='toHome()'>HOME</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div class="row responsive-md">
-    <div class="col col-50 col-offset-25" text-center>
-      <h1 *ngIf="isPortrait">Portrait mode.</h1>
-      <h1 *ngIf="!isPortrait">Landscape mode.</h1>
+  <div class='row responsive-md' padding>
+    <ul>
+      <li>
+        frequency
+        <input type='range' #fIn id='fIn' min='4000' max='8000' (change)='show()' />
+        <span #fOut id='fOut'></span><br/><br/>
+      </li>
+      <li>
+        type
+        <input type='range' #tIn id='tIn' min='0' max='3' (change)='show()' />
+        <span #tOut id='tOut'></span><br/><br/>
+      </li>
+      <li>
+        volume
+        <input type='range' #vIn id='vIn' min='0' max='100' (change)='show()' />
+        <span #vOut id='vOut'></span><br/><br/>
+      </li>
+      <li>
+        duration
+        <input type='range' #dIn id='dIn' min='1' max='5000' (change)='show()' />
+        <span #dOut id='dOut'></span><br/><br/>
+      </li>
+      <li>
+        <button (click)='beep()'>Play</button>
+      </li>
+    </ul>
+  </div>
+  <div class='row responsive-md' padding>
+    <div class='col col-50 col-offset-25' text-center>
+      <h1 *ngIf='isPortrait'>Portrait mode.</h1>
+      <h1 *ngIf='!isPortrait'>Landscape mode.</h1>
       <canvas #canvas id='canvas'></canvas>
     </div>
   </div>

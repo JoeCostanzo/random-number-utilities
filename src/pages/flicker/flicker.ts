@@ -12,7 +12,9 @@
 //
 // let i = 0,
 //   ctx: CanvasRenderingContext2D,
-//   myCanvas;
+//   myCanvas,
+//   myfOut,
+//   myfIn;
 //
 // @Component({
 //   selector: 'page-flicker',
@@ -20,32 +22,40 @@
 // })
 // export class FlickerPage implements AfterContentChecked, OnDestroy {
 //   @ViewChild('canvas') canvas: ElementRef;
+//   @ViewChild('fIn') fIn: ElementRef;
+//   @ViewChild('fOut') fOut: ElementRef;
 //   isPortrait: boolean;
 //   timeouts: number[] = [];
+//   audioCtx: any;
+//   volume: any;
+//   frequency: any;
+//   type: any;
+//   duration: any;
 //
 //   constructor(
 //     public navCtrl: NavController,
 //     public changeDetectorRef: ChangeDetectorRef
 //   ) {
+//     this.audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+//
 //   }
 //
 //   ngAfterContentChecked(): void {
-//     if (window.matchMedia("(orientation: portrait)").matches) {
-//       this.isPortrait = true;
-//     } else {
-//       this.isPortrait = false;
-//     }
+//     this.isPortrait = window.matchMedia("(orientation: portrait)").matches;
 //     // forcing Angular to detect the changes
 //     this.timeouts.push(setTimeout(() => this.changeDetectorRef.detectChanges(), 100));
 //   }
 //
 //   ngOnDestroy() {
-//     this.timeouts.forEach( (val) => clearTimeout(val) );
+//     this.timeouts.forEach(val => clearTimeout(val));
 //   }
 //
 //   public ngAfterViewInit(): void {
 //     myCanvas = this.canvas;
+//     myfIn = this.fIn;
+//     myfOut = this.fOut;
 //     ctx = myCanvas.nativeElement.getContext('2d');
+//     this.show();
 //     this.startFlashing();
 //   }
 //
@@ -66,6 +76,45 @@
 //     ctx.rect(0, 0, myCanvas.width, myCanvas.height);
 //     ctx.fill();
 //     i++;
+//   }
+//
+//
+//   show() {
+//     this.frequency =  myfIn.nativeElement.value;
+//     myfOut.nativeElement.innerHTML = this.frequency + ' Hz';
+//
+//     switch(Number((<HTMLInputElement>document.getElementById("tIn")).value)) {
+//       case 0: this.type='sine'; break;
+//       case 1: this.type='square'; break;
+//       case 2: this.type='sawtooth'; break;
+//       case 3: this.type='triangle'; break;
+//     }
+//     document.getElementById("tOut").innerHTML = this.type;
+//
+//     this.volume =  Number((<HTMLInputElement>document.getElementById("vIn")).value) / 100;
+//     document.getElementById("vOut").innerHTML = this.volume;
+//
+//     this.duration =  (<HTMLInputElement>document.getElementById("dIn")).value;
+//     document.getElementById("dOut").innerHTML = this.duration + ' ms';
+//   }
+//
+//   beep() {
+//     const oscillator = this.audioCtx.createOscillator();
+//     const gainNode = this.audioCtx.createGain();
+//
+//     oscillator.connect(gainNode);
+//     gainNode.connect(this.audioCtx.destination);
+//
+//     gainNode.gain.value = this.volume;
+//     oscillator.frequency.value = this.frequency;
+//     oscillator.type = this.type;
+//
+//     oscillator.start();
+//
+//     setTimeout(
+//       () => oscillator.stop(),
+//       this.duration
+//     );
 //   }
 //
 //   toHome() {
