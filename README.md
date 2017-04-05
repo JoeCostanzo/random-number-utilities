@@ -30,7 +30,6 @@ $ git clone git@github.com:JoeCostanzo/<repo name here>.git
 2: Install packages
 ```shell
 $ npm install
-$ typings install
 ```
 
 3: Build & Run
