@@ -23,9 +23,18 @@ export class MyApp {
       // The platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      Splashscreen.hide();
+      this.hideSplashScreen();
       // MyApp.initPushNotification();
     });
+  }
+
+  hideSplashScreen() {
+    if (Splashscreen) {
+      setTimeout(
+        () => Splashscreen.hide(),
+        100
+      )
+    }
   }
 
   static initPushNotification() {
