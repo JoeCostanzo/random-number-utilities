@@ -1,5 +1,5 @@
 {
-  "name": "random-number-app",
+  "name": "random-number-utils",
   "author": "Joe Costanzo",
   "homepage": "http://joeco.info/",
   "private": true,
@@ -40,5 +40,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "randomNumberApp: a service that dispenses random numbers"
+  "description": "randomNumberUtils: a random number tool-set by Joe Costanzo"
 }
