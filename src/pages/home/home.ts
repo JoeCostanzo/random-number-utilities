@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { RandRange } from '../randrange/randrange.ts';
+import { CoinToss } from '../cointoss/cointoss.ts';
 import { NavController } from 'ionic-angular';
-import { RandPage } from '../rand/rand.ts';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,8 @@ export class HomePage {
 
   toPage(choice: number) {
     this.navCtrl.push(
-      choice === 0 && (RandPage)
+      choice === 1 && (RandRange)
+      || choice === 2 && (CoinToss)
     );
   }
 }

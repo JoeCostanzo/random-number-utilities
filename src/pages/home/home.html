@@ -4,23 +4,41 @@
       Welcome
     </ion-title>
     <ion-buttons right>
-      <button ion-button (click)="toPage(0)">START!</button>
+      <button ion-button (click)='toPage(1)'>START!</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <p>
-    <strong>Welcome to the Authoritative Random Number Dispenser.</strong>
+    <strong>Welcome to the Authoritative Random Number Utility Suite.</strong>
   </p>
   <p>
-    This application harnesses the output of government certified random number authorities (via online APIs),
-    and caches their generated numbers, which are guaranteed TRUE random numbers, onto your device.
+    This application uses government-certified, authoritative random number sources (via accessing publicly-available online APIs). Therefore, the results produced are not 'pseudo-random' (as many so-called 'random' / impostor apps in widespread usage suffer from), but rather are guaranteed TRUE random numbers, which can be proven via timestamp verification code.
   </p>
   <p>
-    These random numbers can be displayed to you at any time on the next screen, according to your request.
+    The random number data (seed data) is cached to your device upon it's retrieval from the internet, and then is used in the various tools within the app.
   </p>
   <p>
-    Simply enter your desired range for them to be between, and enjoy your random numbers!
+    <strong>Get Started!</strong>
+    To begin, please try any of the tools below...
   </p>
+  <ion-list>
+    <button ion-button block (click)='toPage(1)'>
+      Request a number
+    </button>
+    <p>Simply enter your desired range, and receive a certified-random number between the minimum and maximum you set!</p>
+    <button ion-button block (click)='toPage(2)'>
+      Coin toss simulation!
+    </button>
+    <p>The classic randomness example, except this version (as all within the app do) uses the hard-science based back-end algorithm as described above, with certified government agency random numbers as seed data.</p>
+  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      More features coming soon
+    </ion-card-header>
+    <ion-card-content>
+      Thank you for your interest and trying of this application. ~Joe Costanzo
+    </ion-card-content>
+  </ion-card>
 </ion-content>
