@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Coin Toss
+    </ion-title>
+    <ion-buttons right>
+      <ion-spinner name="dots" *ngIf="storedNumbers.providerLoadPending"></ion-spinner>
+      <ion-spinner *ngIf="simulateFetching"></ion-spinner>
+      <button ion-button (click)="toPage(0)">HOME</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class='coin-content' padding>
+  <p>
+    <strong>Simulate a random coin toss</strong>
+  </p>
+  <button ion-button round (click)='toss($event)'>
+    Toss
+  </button>
+  <ion-list>
+    <ion-item>
+      <p><strong>Result: </strong><span *ngIf='simulateFetching'>[ WORKING... ]</span></p>
+      <div *ngIf='tossReqFulfilled'>
+        <p>{{result}}</p>
+        <div class='my-text-wrap' *ngIf='storedNumbers.originalSource.type === 1'>
+          <p><strong>Number seed data (origin: NIST.gov):</strong></p>
+          <p>{{storedNumbers.originalSource.rawNum}}</p>
+          <p><strong>Timestamp (for retrieval of source data as proof from certified origin):</strong></p>
+          <p>{{storedNumbers.originalSource.timeStamp}}</p>
+        </div>
+        <div class='my-text-wrap' *ngIf='storedNumbers.originalSource.type === 2'>
+          <p>Temporary error in number retrieval method (network error).</p>
+          <p>Unable to reach certified origin source; true randomness of result not guaranteed.</p>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

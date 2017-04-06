@@ -1,0 +1,21 @@
+page-cointoss {
+  .coin-content {
+    background: #b8c1ea;
+    align-items: center;
+    text-align: center;
+  }
+
+  .my-text-wrap {
+    white-space: normal;
+  }
+
+  ion-item {
+    border-radius: 30px !important;
+    padding-left: 30px !important;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    border: 1px solid #ffffff;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+}
