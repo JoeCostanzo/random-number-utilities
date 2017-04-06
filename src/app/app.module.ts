@@ -9,6 +9,7 @@ import { RandRange } from '../pages/randrange/randrange.ts';
 import { CoinToss } from '../pages/cointoss/cointoss';
 import { Crawler } from '../providers/crawler/crawler.ts';
 import { StoredNumbers } from '../providers/storednums/storednums.ts';
+import { AppSettings } from './app.settings';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { StoredNumbers } from '../providers/storednums/storednums.ts';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AppSettings,
     Crawler,
     StoredNumbers
   ]
