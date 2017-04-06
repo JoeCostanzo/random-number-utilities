@@ -1,10 +1,12 @@
-# Random Number Dispenser App
+# Random Number Utilities
 [Description](#description) |
 [Prerequisites](#prerequisites) |
 [Usage](#usage) |
 
 ## Description
-Pulls random numbers from government bodies and delivers them to the user.
+This application uses government-certified, authoritative random number sources (via accessing publicly-available online APIs). Therefore, the results produced are not 'pseudo-random' (as many so-called 'random' / impostor apps in widespread usage suffer from), but rather are guaranteed TRUE random numbers, which can be proven via time-stamp verification code.
+
+The random number data (seed data) is cached to your device upon it's retrieval from the internet, and then is used in the various tools within the app.
 
 ## Prerequisites
 NodeJS / NPM must be already installed on your machine before running this app.
