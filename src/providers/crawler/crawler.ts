@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { AppSettings } from '../../app/AppSettings';
-
+import { AppSettings } from '../../app/app.settings';
 import { Platform } from 'ionic-angular';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -10,7 +9,11 @@ import 'rxjs/add/operator/map';
 export class Crawler {
   results: any;
 
-  constructor(private http: Http, private platform: Platform) {
+  constructor(
+    private appSettings: AppSettings,
+    private http: Http,
+    private platform: Platform
+  ) {
     this.results = null;
   }
 
@@ -30,7 +33,7 @@ export class Crawler {
               rawNum: data.match(re1)[1].split(/</)[0]
             };
             let tmp = (originalSource.rawNum.replace(/([a-z])/gi, "")).split('');
-            tmp.length = ("" + AppSettings.RAND_NUM_MAGNITUDE).length;
+            tmp.length = ("" + this.appSettings.RAND_NUM_MAXIMUM).length;
             return resolve({
               originalSource,
               iterable: parseInt(tmp.join(""), 10)
