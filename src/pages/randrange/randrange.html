@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Random Range
+    </ion-title>
+    <ion-buttons right>
+      <ion-spinner name='dots' *ngIf='storedNumbers.providerLoadPending'></ion-spinner>
+      <ion-spinner *ngIf='simulateFetching'></ion-spinner>
+      <button ion-button (click)='toPage(0)'>HOME</button>
+      <button ion-button (click)='toPage(2)'>NEXT</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class='rand-content rand-box' padding>
+  <p><strong>Request a true random number (range-bound)</strong></p>
+  <form [formGroup]='reqForm' (submit)='submitFormRequest($event)'>
+    <ion-item>
+      <ion-label color='primary'>Min Desired Number</ion-label>
+      <ion-input
+        type='tel'
+        pattern='[0-9]*'
+        formControlName='min'
+        (keyup)='eraseLeadingZero($event, "min")'
+        clearInput></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!reqForm.controls.min.valid  && (reqForm.controls.min.dirty || formReqFulfilled)">
+      <p class="invalid">Must be a number above {{appSettings.RAND_NUM_MINIMUM - 1}} and below {{appSettings.RAND_NUM_MAXIMUM + 1}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color='primary'>Max Desired Number</ion-label>
+      <ion-input
+        type='tel'
+        pattern='[0-9]*'
+        formControlName='max'
+        (keyup)='eraseLeadingZero($event, "max")'
+        clearInput></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!reqForm.controls.max.valid  && (reqForm.controls.max.dirty || formReqFulfilled)">
+      <p class="invalid">Must be a number above {{appSettings.RAND_NUM_MINIMUM - 1}} and below {{appSettings.RAND_NUM_MAXIMUM + 1}}</p>
+    </ion-item>
+
+    <button
+      [disabled]='!reqForm.valid'
+      ion-button
+      type='submit'
+      block>Submit Number Request</button>
+  </form>
+  <ion-list>
+    <ion-item>
+      <p><strong>Result: </strong><span *ngIf='simulateFetching'>[ WORKING... ]</span></p>
+      <div *ngIf='formReqFulfilled'>
+        <p>{{result}}</p>
+        <div class='my-text-wrap' *ngIf='storedNumbers.originalSource.type === 1'>
+          <p><strong>Number seed data (origin: NIST.gov):</strong></p>
+          <p>{{storedNumbers.originalSource.rawNum}}</p>
+          <p><strong>Timestamp (for retrieval of source data as proof from certified origin):</strong></p>
+          <p>{{storedNumbers.originalSource.timeStamp}}</p>
+        </div>
+        <div class='my-text-wrap' *ngIf='storedNumbers.originalSource.type === 2'>
+          <p>Temporary error in number retrieval method (network error).</p>
+          <p>Unable to reach certified origin source; true randomness of result not guaranteed.</p>
+        </div>
+
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

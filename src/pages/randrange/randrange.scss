@@ -1,7 +1,13 @@
-page-rand {
+page-randrange {
+
+  .invalid {
+    color: #ea6153 !important;
+  }
 
   .rand-content {
     background: #b8c1ea;
+    align-items: center;
+    text-align: center;
 
     .my-text-wrap {
       white-space: normal;
@@ -11,11 +17,6 @@ page-rand {
       background: #b8c1ea;
       padding: 20px 20px 0px 20px;
       margin-top: 30px;
-    }
-
-    ion-row {
-      align-items: center;
-      text-align: center;
     }
 
     ion-item {
