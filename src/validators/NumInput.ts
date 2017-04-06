@@ -1,10 +1,13 @@
 import { FormControl } from '@angular/forms';
-import { AppSettings } from '../app/AppSettings';
+import {AppSettings} from '../app/app.settings';
 
 export class NumInputValidator {
+  static appSettings: any = new AppSettings();
 
-  static isValid(control: FormControl): any {
 
+  static isValid(
+    control: FormControl
+  ): any {
     if(isNaN(control.value)) {
       return {
         "not a number": true
@@ -17,13 +20,13 @@ export class NumInputValidator {
       };
     }
 
-    if(control.value < 1) {
+    if(control.value < NumInputValidator.appSettings.RAND_NUM_MINIMUM) {
       return {
         "only positive numbers": true
       };
     }
 
-    if (control.value > AppSettings.RAND_NUM_MAGNITUDE) {
+    if (control.value > NumInputValidator.appSettings.RAND_NUM_MAXIMUM) {
       return {
         "number is larger than we support": true
       };
