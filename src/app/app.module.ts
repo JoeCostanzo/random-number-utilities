@@ -5,14 +5,17 @@ import { MyApp } from './app.component';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { HomePage } from '../pages/home/home';
-import { RandPage } from '../pages/rand/rand.ts';
+import { RandRange } from '../pages/randrange/randrange.ts';
+import { CoinToss } from '../pages/cointoss/cointoss';
 import { Crawler } from '../providers/crawler/crawler.ts';
+import { StoredNumbers } from '../providers/storednums/storednums.ts';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    RandPage
+    RandRange,
+    CoinToss
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -23,8 +26,13 @@ import { Crawler } from '../providers/crawler/crawler.ts';
   entryComponents: [
     MyApp,
     HomePage,
-    RandPage
+    RandRange,
+    CoinToss
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Crawler]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Crawler,
+    StoredNumbers
+  ]
 })
 export class AppModule {}
