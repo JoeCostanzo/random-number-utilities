@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { AppSettings } from '../../app/app.settings';
 import { Platform } from 'ionic-angular';

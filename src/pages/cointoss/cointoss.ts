@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HomePage } from '../../pages/home/home.ts';
 import { NavController } from 'ionic-angular';
-import { StoredNumbers } from "../../providers/storednums/storednums";
+import { StoredNumbers } from '../../providers/storednums/storednums';
 import { shuffle } from 'lodash';
 
 @Component({
@@ -32,9 +32,9 @@ export class CoinToss {
     const setResult = x => {
       this.tossReqFulfilled = true;
       if (x) {
-        return this.result = "heads";
+        return this.result = 'heads';
       }
-      this.result = "tails";
+      this.result = 'tails';
     };
     if (this.storedNumbers.storedNumArray.length < this.seedDataLength) {
       return this.storedNumbers.populateStoredNumbers()
